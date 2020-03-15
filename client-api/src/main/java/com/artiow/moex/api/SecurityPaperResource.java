@@ -11,8 +11,10 @@ public interface SecurityPaperResource {
      * Returns list of securities traded on the MOEX.
      *
      * @param query    the query by secid, name, isin, emitentTitle, regnumber;
+     * @param engine   the engine name to be searched;
+     * @param market   the market name to be searched;
      * @param isTraded the sign that security paper is traded on the MOEX;
-     * @param start    the number of the first returned row;
+     * @param start    the offset from the beginning of the list;
      * @param limit    the number of returned securities;
      * @param lang     the response language code;
      * @return the list of securities.
@@ -20,7 +22,9 @@ public interface SecurityPaperResource {
      */
     List<SecurityPaperSearchResult> search(
             String query,
-            Integer isTraded,
+            String engine,
+            String market,
+            Boolean isTraded,
             Integer start,
             Integer limit,
             String lang

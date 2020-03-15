@@ -13,7 +13,7 @@ public class SecurityPaperSearchResult {
     private String regnumber;
     private String name;
     private String isin;
-    private Integer isTraded;
+    private Boolean isTraded;
     private Integer emitentId;
     private String emitentTitle;
     private String emitentInn;
