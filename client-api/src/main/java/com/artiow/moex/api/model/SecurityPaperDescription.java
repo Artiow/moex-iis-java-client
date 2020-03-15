@@ -4,7 +4,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
 import static java.lang.String.format;
@@ -34,16 +40,29 @@ public class SecurityPaperDescription {
         return map.get(key).getTitle();
     }
 
-    public String getString(SecurityPaperDescriptionKey key) {
-        return get(key, String.class);
+
+    public Boolean getBoolean(SecurityPaperDescriptionKey key) {
+        return get(key, Boolean.class);
     }
 
     public Number getNumber(SecurityPaperDescriptionKey key) {
         return get(key, Number.class);
     }
 
-    public Date getDate(SecurityPaperDescriptionKey key) {
-        return get(key, Date.class);
+    public String getString(SecurityPaperDescriptionKey key) {
+        return get(key, String.class);
+    }
+
+    public LocalDate getDate(SecurityPaperDescriptionKey key) {
+        return get(key, LocalDate.class);
+    }
+
+    public LocalTime getTime(SecurityPaperDescriptionKey key) {
+        return get(key, LocalTime.class);
+    }
+
+    public LocalDateTime getDatetime(SecurityPaperDescriptionKey key) {
+        return get(key, LocalDateTime.class);
     }
 
     private <T extends Serializable> T get(SecurityPaperDescriptionKey key, Class<T> type) {
@@ -54,16 +73,28 @@ public class SecurityPaperDescription {
     }
 
 
-    public String putString(SecurityPaperDescriptionKey key, String value, String title) {
-        return put(key, value, String.class, title);
+    public Boolean putBoolean(SecurityPaperDescriptionKey key, Boolean value, String title) {
+        return put(key, value, Boolean.class, title);
     }
 
     public Number putNumber(SecurityPaperDescriptionKey key, Number value, String title) {
         return put(key, value, Number.class, title);
     }
 
-    public Date putDate(SecurityPaperDescriptionKey key, Date value, String title) {
-        return put(key, value, Date.class, title);
+    public String putString(SecurityPaperDescriptionKey key, String value, String title) {
+        return put(key, value, String.class, title);
+    }
+
+    public LocalDate putDate(SecurityPaperDescriptionKey key, LocalDate value, String title) {
+        return put(key, value, LocalDate.class, title);
+    }
+
+    public LocalTime putTime(SecurityPaperDescriptionKey key, LocalTime value, String title) {
+        return put(key, value, LocalTime.class, title);
+    }
+
+    public LocalDateTime putDatetime(SecurityPaperDescriptionKey key, LocalDateTime value, String title) {
+        return put(key, value, LocalDateTime.class, title);
     }
 
     private <T extends Serializable> T put(SecurityPaperDescriptionKey key, T value, Class<T> type, String title) {
@@ -95,11 +126,11 @@ public class SecurityPaperDescription {
         return map(SecurityPaperDescriptionValue::getTitle);
     }
 
-    public Map<SecurityPaperDescriptionKey, Object> valueMap() {
+    public Map<SecurityPaperDescriptionKey, Serializable> valueMap() {
         return map(SecurityPaperDescriptionValue::getValue);
     }
 
-    private <T> Map<SecurityPaperDescriptionKey, T> map(Function<SecurityPaperDescriptionValue<?>, T> extractor) {
+    private <T extends Serializable> Map<SecurityPaperDescriptionKey, T> map(Function<SecurityPaperDescriptionValue<?>, T> extractor) {
         return map
                 .entrySet()
                 .stream()

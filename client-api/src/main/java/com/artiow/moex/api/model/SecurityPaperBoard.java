@@ -3,7 +3,7 @@ package com.artiow.moex.api.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,12 +17,12 @@ public class SecurityPaperBoard {
     private String market;
     private Integer engineId;
     private String engine;
-    private Integer isTraded;
+    private Boolean isTraded;
     private Integer decimals;
-    private Date historyFrom;
-    private Date historyTill;
-    private Date listedFrom;
-    private Date listedTill;
-    private Integer isPrimary;
+    private LocalDate historyFrom;
+    private LocalDate historyTill;
+    private LocalDate listedFrom;
+    private LocalDate listedTill;
+    private Boolean isPrimary;
     private String currencyid;
 }
