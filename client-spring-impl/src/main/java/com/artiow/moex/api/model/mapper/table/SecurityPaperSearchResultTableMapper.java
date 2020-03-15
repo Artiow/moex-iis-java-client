@@ -15,7 +15,7 @@ public class SecurityPaperSearchResultTableMapper extends AbstractTableMapper<Se
         result.setRegnumber(processor.readString("regnumber"));
         result.setName(processor.readString("name"));
         result.setIsin(processor.readString("isin"));
-        result.setIsTraded(processor.readInteger("is_traded"));
+        result.setIsTraded(processor.readBoolean("is_traded"));
         result.setEmitentId(processor.readInteger("emitent_id"));
         result.setEmitentTitle(processor.readString("emitent_title"));
         result.setEmitentInn(processor.readString("emitent_inn"));

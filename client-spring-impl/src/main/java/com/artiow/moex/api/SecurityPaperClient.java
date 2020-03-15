@@ -28,9 +28,19 @@ public class SecurityPaperClient implements SecurityPaperResource {
 
 
     @Override
-    public List<SecurityPaperSearchResult> search(String query, Integer isTraded, Integer start, Integer limit, String lang) {
+    public List<SecurityPaperSearchResult> search(
+            String query,
+            String engine,
+            String market,
+            Boolean isTraded,
+            Integer start,
+            Integer limit,
+            String lang
+    ) {
         val queryParams = queryParamsBuilder(5)
                 .set("q", query)
+                .set("engine", engine)
+                .set("market", market)
                 .set("is_trading", isTraded)
                 .set("start", start)
                 .set("limit", limit)
@@ -42,7 +52,10 @@ public class SecurityPaperClient implements SecurityPaperResource {
     }
 
     @Override
-    public SecurityPaperSpecification getSpecification(String secid, String lang) {
+    public SecurityPaperSpecification getSpecification(
+            String secid,
+            String lang
+    ) {
         val uriParams = uriParamsBuilder(1)
                 .set("secid", secid);
 
