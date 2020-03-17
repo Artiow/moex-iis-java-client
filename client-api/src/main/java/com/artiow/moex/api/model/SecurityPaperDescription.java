@@ -14,7 +14,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 import static java.lang.String.format;
-import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -72,13 +71,11 @@ public class SecurityPaperDescription {
     }
 
 
-    public Object putValue(SecurityPaperDescriptionKey key, Object value, String title) {
-        if (key.getType() != value.getClass()) {
-            throw new IllegalArgumentException(format("Wrong value type! Expected %s, but found %s", key.getType().getName(), value.getClass().getName()));
+    public void putValue(SecurityPaperDescriptionKey key, Object value, String title) {
+        if (!key.getType().isAssignableFrom(value.getClass())) {
+            throw new IllegalArgumentException(format("Value type %s does not assignable to key type %s", value.getClass().getName(), key.getType().getName()));
         }
-        return ofNullable(map.put(key, new SecurityPaperDescriptionValue<>((Serializable) value, title)))
-                .map(SecurityPaperDescriptionValue::getValue)
-                .orElse(null);
+        map.put(key, new SecurityPaperDescriptionValue<>((Serializable) value, title));
     }
 
 
