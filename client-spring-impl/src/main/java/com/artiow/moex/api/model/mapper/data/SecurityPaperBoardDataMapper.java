@@ -1,10 +1,10 @@
-package com.artiow.moex.api.model.mapper.table;
+package com.artiow.moex.api.model.mapper.data;
 
 import com.artiow.moex.api.model.SecurityPaperBoard;
 import com.artiow.moex.api.model.mapper.extractor.AttributeExtractor;
 import lombok.val;
 
-public class SecurityPaperBoardTableMapper extends AbstractTableMapper<SecurityPaperBoard> {
+public class SecurityPaperBoardDataMapper extends AbstractDataStreamMapper<SecurityPaperBoard> {
 
     @Override
     protected SecurityPaperBoard rowMapping(AttributeExtractor.Processor processor) {
