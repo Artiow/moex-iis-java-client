@@ -24,9 +24,10 @@ public class AttributeExtractor {
     private static final Map<String, AttributeType> TYPE_MAP;
 
     static {
-        TYPE_MAP = Arrays.stream(AttributeType.values()).collect(Collectors.toMap(
-                AttributeType::getValue, Function.identity()
-        ));
+        TYPE_MAP = Collections.unmodifiableMap(Arrays.stream(AttributeType.values()).collect(Collectors.toMap(
+                AttributeType::getValue,
+                Function.identity()
+        )));
     }
 
 
@@ -38,7 +39,8 @@ public class AttributeExtractor {
     public AttributeExtractor(List<Column> columns) {
         this.attributeParser = new AttributeParser();
         this.columnTypeMap = columns.stream().collect(Collectors.toMap(
-                Column::getName, column -> getType(column.getType())
+                Column::getName,
+                column -> getType(column.getType())
         ));
     }
 
@@ -63,15 +65,16 @@ public class AttributeExtractor {
                 .orElseThrow(() -> new IllegalArgumentException(format("There is no \"%s\" attribute type", value)));
     }
 
-    private AttributeType getColumnType(String column) {
-        return columnTypeMap.get(QName.valueOf(column));
-    }
-
 
     @RequiredArgsConstructor(access = PRIVATE)
     public class Processor {
 
-        private final Row processedRow;
+        private final Map<QName, String> attributes;
+
+
+        public Processor(Row row) {
+            this.attributes = row.getAttributes();
+        }
 
 
         public AttributeExtractor release() {
@@ -116,21 +119,12 @@ public class AttributeExtractor {
         }
 
 
-        private <T extends Serializable> T read(String attribute, Class<T> type) {
-            val value = read(attribute);
-            if (getColumnType(attribute).getType() != type) {
-                throw new IllegalArgumentException(format("Cannot read %s! Attribute type is %s", type.getName(), getColumnType(attribute).getType().getName()));
-            }
-            return attributeParser.parse(value, type);
-        }
-
-        public String read(String attribute) {
+        public <T extends Serializable> T read(String attribute, Class<T> type) {
             val qname = QName.valueOf(attribute);
-            val attributes = processedRow.getAttributes();
             if (!attributes.containsKey(qname)) {
-                throw new IllegalArgumentException(format("Row does not contain \"%s\" attribute", attribute));
+                throw new IllegalArgumentException(format("Processed row does not contain \"%s\" attribute", attribute));
             }
-            return attributes.get(qname);
+            return attributeParser.parse(attributes.get(qname), type);
         }
     }
 }

@@ -5,6 +5,7 @@ import com.artiow.moex.api.model.SecurityPaperSearchResult;
 import com.artiow.moex.api.model.SecurityPaperSpecification;
 import com.artiow.moex.api.model.mapper.DocumentMapper;
 import com.artiow.moex.api.model.mapper.SecurityPaperSearchResultMapper;
+import com.artiow.moex.api.model.mapper.SecurityPaperSpecificationMapper;
 import lombok.val;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class SecurityPaperClient implements SecurityPaperResource {
     public SecurityPaperClient(MoexApiClient client) {
         this.client = client;
         this.searchResultMapper = new SecurityPaperSearchResultMapper();
-        this.specificationMapper = __ -> { throw new UnsupportedOperationException(); };
+        this.specificationMapper = new SecurityPaperSpecificationMapper();
     }
 
 

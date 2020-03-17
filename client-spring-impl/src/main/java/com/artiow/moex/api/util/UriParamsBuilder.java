@@ -1,9 +1,9 @@
 package com.artiow.moex.api.util;
 
+import org.springframework.util.Assert;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import static java.util.Objects.nonNull;
 
 public class UriParamsBuilder {
 
@@ -21,9 +21,9 @@ public class UriParamsBuilder {
 
 
     public UriParamsBuilder set(String parameter, Object value) {
-        if (nonNull(parameter) && nonNull(value)) {
-            map.put(parameter, value.toString());
-        }
+        Assert.notNull(parameter, "URI parameter cannot be null!");
+        Assert.notNull(value, "URI parameter value cannot be null!");
+        map.put(parameter, value.toString());
         return this;
     }
 
