@@ -40,7 +40,6 @@ public class SecurityPaperDescription {
         return map.get(key).getTitle();
     }
 
-
     public Boolean getBoolean(SecurityPaperDescriptionKey key) {
         return get(key, Boolean.class);
     }
@@ -73,37 +72,12 @@ public class SecurityPaperDescription {
     }
 
 
-    public Boolean putBoolean(SecurityPaperDescriptionKey key, Boolean value, String title) {
-        return put(key, value, Boolean.class, title);
-    }
-
-    public Number putNumber(SecurityPaperDescriptionKey key, Number value, String title) {
-        return put(key, value, Number.class, title);
-    }
-
-    public String putString(SecurityPaperDescriptionKey key, String value, String title) {
-        return put(key, value, String.class, title);
-    }
-
-    public LocalDate putDate(SecurityPaperDescriptionKey key, LocalDate value, String title) {
-        return put(key, value, LocalDate.class, title);
-    }
-
-    public LocalTime putTime(SecurityPaperDescriptionKey key, LocalTime value, String title) {
-        return put(key, value, LocalTime.class, title);
-    }
-
-    public LocalDateTime putDatetime(SecurityPaperDescriptionKey key, LocalDateTime value, String title) {
-        return put(key, value, LocalDateTime.class, title);
-    }
-
-    private <T extends Serializable> T put(SecurityPaperDescriptionKey key, T value, Class<T> type, String title) {
-        if (key.getType() != type) {
-            throw new IllegalArgumentException(format("Wrong key type! Expected %s, but found %s", type, key.getType().getName()));
+    public Object putValue(SecurityPaperDescriptionKey key, Object value, String title) {
+        if (key.getType() != value.getClass()) {
+            throw new IllegalArgumentException(format("Wrong value type! Expected %s, but found %s", key.getType().getName(), value.getClass().getName()));
         }
-        return ofNullable(map.put(key, new SecurityPaperDescriptionValue<>(value, title)))
+        return ofNullable(map.put(key, new SecurityPaperDescriptionValue<>((Serializable) value, title)))
                 .map(SecurityPaperDescriptionValue::getValue)
-                .map(type::cast)
                 .orElse(null);
     }
 
