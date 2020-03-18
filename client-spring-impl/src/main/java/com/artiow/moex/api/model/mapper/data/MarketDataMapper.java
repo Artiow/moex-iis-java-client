@@ -10,7 +10,7 @@ public class MarketDataMapper extends AbstractDataStreamMapper<Market> {
     protected Market rowMapping(AttributeExtractor.Processor processor) {
         val result = new Market();
         result.setId(processor.readInteger("id"));
-        result.setName(processor.readString("name"));
+        result.setName(processor.readString("NAME"));
         result.setTitle(processor.readString("title"));
         return result;
     }

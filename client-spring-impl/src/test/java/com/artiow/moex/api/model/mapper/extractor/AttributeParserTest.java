@@ -65,6 +65,14 @@ public class AttributeParserTest {
     }
 
     @Test
+    public void testParseDouble() {
+        // act
+        val result = attributeParser.parse("3.14", Double.class);
+        // assert
+        Assert.assertEquals(3.14, result, 0);
+    }
+
+    @Test
     public void testParseString() {
         // act
         val result = attributeParser.parse("string", String.class);

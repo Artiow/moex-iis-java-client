@@ -31,6 +31,7 @@ public class AttributeExtractorTest {
                 newColumn("attrNumber", "number"),
                 newColumn("attrInt32", "int32"),
                 newColumn("attrInt64", "int64"),
+                newColumn("attrDouble", "double"),
                 newColumn("attrString", "string"),
                 newColumn("attrDate", "date"),
                 newColumn("attrTime", "time"),
@@ -89,6 +90,16 @@ public class AttributeExtractorTest {
         val result = attributeExtractor.process(row).readLong("attrInt64");
         // assert
         Assert.assertEquals(3L, result.longValue());
+    }
+
+    @Test
+    public void testReadDouble() {
+        // arrange
+        val row = newRow("attrDouble", "3.14");
+        // act
+        val result = attributeExtractor.process(row).readDouble("attrDouble");
+        // assert
+        Assert.assertEquals(3.14, result, 0);
     }
 
     @Test
