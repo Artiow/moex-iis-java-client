@@ -102,6 +102,10 @@ public class AttributeExtractor {
             return read(attribute, Long.class);
         }
 
+        public Double readDouble(String attribute) {
+            return read(attribute, Double.class);
+        }
+
         public String readString(String attribute) {
             return read(attribute, String.class);
         }

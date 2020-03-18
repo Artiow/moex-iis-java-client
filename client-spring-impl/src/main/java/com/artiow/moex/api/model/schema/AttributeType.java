@@ -16,6 +16,7 @@ public enum AttributeType {
     NUMBER("number", Number.class),
     INT32("int32", Integer.class),
     INT64("int64", Long.class),
+    DOUBLE("double", Double.class),
     STRING("string", String.class),
     DATE("date", LocalDate.class),
     TIME("time", LocalTime.class),

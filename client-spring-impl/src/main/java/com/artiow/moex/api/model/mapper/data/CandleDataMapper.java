@@ -9,14 +9,14 @@ public class CandleDataMapper extends AbstractDataStreamMapper<Candle> {
     @Override
     protected Candle rowMapping(AttributeExtractor.Processor processor) {
         val result = new Candle();
-        result.setOpen(processor.readString("open"));
-        result.setClose(processor.readString("close"));
-        result.setHigh(processor.readString("high"));
-        result.setLow(processor.readString("low"));
-        result.setValue(processor.readString("value"));
-        result.setVolume(processor.readString("volume"));
-        result.setBegin(processor.readString("begin"));
-        result.setEnd(processor.readString("end"));
+        result.setOpen(processor.readDouble("open"));
+        result.setClose(processor.readDouble("close"));
+        result.setHigh(processor.readDouble("high"));
+        result.setLow(processor.readDouble("low"));
+        result.setValue(processor.readDouble("value"));
+        result.setVolume(processor.readDouble("volume"));
+        result.setBegin(processor.readDatetime("begin"));
+        result.setEnd(processor.readDatetime("end"));
         return result;
     }
 }

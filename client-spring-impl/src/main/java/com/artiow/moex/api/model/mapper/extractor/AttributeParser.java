@@ -45,6 +45,7 @@ public class AttributeParser {
         rules.put(Number.class, this::parseNumber);
         rules.put(Integer.class, this::parseInteger);
         rules.put(Long.class, this::parseLong);
+        rules.put(Double.class, this::parseDouble);
         rules.put(String.class, this::parseString);
         rules.put(LocalDate.class, this::parseDate);
         rules.put(LocalTime.class, this::parseTime);
@@ -100,6 +101,14 @@ public class AttributeParser {
             return Long.parseLong(attribute);
         } catch (Exception e) {
             throw exceptionFor(attribute, Long.class, e);
+        }
+    }
+
+    private Double parseDouble(String attribute) {
+        try {
+            return Double.parseDouble(attribute);
+        } catch (Exception e) {
+            throw exceptionFor(attribute, Double.class, e);
         }
     }
 
