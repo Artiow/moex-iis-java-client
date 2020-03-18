@@ -8,7 +8,8 @@ import lombok.Setter;
 public class Board {
 
     private Integer id;
+    private Integer boardGroupId;
     private String boardid;
     private String title;
-    private Integer isTraded;
+    private Boolean isTraded;
 }
