@@ -1,5 +1,6 @@
 package com.artiow.moex.api.util;
 
+import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -21,7 +22,8 @@ public class QueryParamsBuilder {
 
 
     public QueryParamsBuilder set(String parameter, Object value) {
-        if (nonNull(parameter) && nonNull(value)) {
+        Assert.notNull(parameter, "Query parameter name cannot be null!");
+        if (nonNull(value)) {
             map.set(parameter, value.toString());
         }
         return this;

@@ -21,7 +21,7 @@ public class UriParamsBuilder {
 
 
     public UriParamsBuilder set(String parameter, Object value) {
-        Assert.notNull(parameter, "URI parameter cannot be null!");
+        Assert.notNull(parameter, "URI parameter name cannot be null!");
         Assert.notNull(value, "URI parameter value cannot be null!");
         map.put(parameter, value.toString());
         return this;
