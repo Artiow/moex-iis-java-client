@@ -6,7 +6,7 @@ import com.artiow.moex.api.model.schema.Row;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class AbstractDataStreamMapper<T> extends AbstractDataMapper<List<T>> {
+public abstract class AbstractDataStreamMapper<T> extends AbstractDataMapper<List<T>> implements DataStreamMapper<T> {
 
     @Override
     protected List<T> rowMapping(List<Row> rows, AttributeExtractor extractor) {

@@ -5,7 +5,7 @@ import com.artiow.moex.api.model.Board;
 import com.artiow.moex.api.model.Candle;
 import com.artiow.moex.api.model.Engine;
 import com.artiow.moex.api.model.Market;
-import com.artiow.moex.api.model.mapper.DocumentMapper;
+import com.artiow.moex.api.model.mapper.*;
 import lombok.val;
 
 import java.time.LocalDate;
@@ -26,10 +26,10 @@ public class EngineClient implements EngineResource {
 
     public EngineClient(MoexApiClient client) {
         this.client = client;
-        this.engineMapper = __ -> { throw new UnsupportedOperationException(); };
-        this.marketMapper = __ -> { throw new UnsupportedOperationException(); };
-        this.boardMapper = __ -> { throw new UnsupportedOperationException(); };
-        this.candleMapper = __ -> { throw new UnsupportedOperationException(); };
+        this.engineMapper = new EngineMapper();
+        this.marketMapper = new MarketMapper();
+        this.boardMapper = new BoardMapper();
+        this.candleMapper = new CandleMapper();
     }
 
 
