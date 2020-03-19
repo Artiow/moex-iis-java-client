@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -16,7 +17,7 @@ public enum AttributeType {
     NUMBER("number", Number.class),
     INT32("int32", Integer.class),
     INT64("int64", Long.class),
-    DOUBLE("double", Double.class),
+    DOUBLE("double", BigDecimal.class),
     STRING("string", String.class),
     DATE("date", LocalDate.class),
     TIME("time", LocalTime.class),

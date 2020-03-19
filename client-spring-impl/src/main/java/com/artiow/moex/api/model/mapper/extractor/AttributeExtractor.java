@@ -8,6 +8,7 @@ import lombok.val;
 
 import javax.xml.namespace.QName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -102,8 +103,8 @@ public class AttributeExtractor {
             return read(attribute, Long.class);
         }
 
-        public Double readDouble(String attribute) {
-            return read(attribute, Double.class);
+        public BigDecimal readBigDecimal(String attribute) {
+            return read(attribute, BigDecimal.class);
         }
 
         public String readString(String attribute) {
@@ -118,7 +119,7 @@ public class AttributeExtractor {
             return read(attribute, LocalTime.class);
         }
 
-        public LocalDateTime readDatetime(String attribute) {
+        public LocalDateTime readDateTime(String attribute) {
             return read(attribute, LocalDateTime.class);
         }
 

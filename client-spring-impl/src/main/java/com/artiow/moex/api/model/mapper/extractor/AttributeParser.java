@@ -3,6 +3,7 @@ package com.artiow.moex.api.model.mapper.extractor;
 import lombok.val;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,11 +46,11 @@ public class AttributeParser {
         rules.put(Number.class, this::parseNumber);
         rules.put(Integer.class, this::parseInteger);
         rules.put(Long.class, this::parseLong);
-        rules.put(Double.class, this::parseDouble);
+        rules.put(BigDecimal.class, this::parseBigDecimal);
         rules.put(String.class, this::parseString);
         rules.put(LocalDate.class, this::parseDate);
         rules.put(LocalTime.class, this::parseTime);
-        rules.put(LocalDateTime.class, this::parseDatetime);
+        rules.put(LocalDateTime.class, this::parseDateTime);
         this.rules = rules;
     }
 
@@ -104,9 +105,9 @@ public class AttributeParser {
         }
     }
 
-    private Double parseDouble(String attribute) {
+    private BigDecimal parseBigDecimal(String attribute) {
         try {
-            return Double.parseDouble(attribute);
+            return new BigDecimal(attribute);
         } catch (Exception e) {
             throw exceptionFor(attribute, Double.class, e);
         }
@@ -132,7 +133,7 @@ public class AttributeParser {
         }
     }
 
-    private LocalDateTime parseDatetime(String attribute) {
+    private LocalDateTime parseDateTime(String attribute) {
         try {
             return LocalDateTime.parse(attribute, LOCAL_DATE_TIME_FORMATTER);
         } catch (Exception e) {

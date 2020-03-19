@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -65,11 +66,11 @@ public class AttributeParserTest {
     }
 
     @Test
-    public void testParseDouble() {
+    public void testParseBigDecimal() {
         // act
-        val result = attributeParser.parse("3.14", Double.class);
+        val result = attributeParser.parse("3.14", BigDecimal.class);
         // assert
-        Assert.assertEquals(3.14, result, 0);
+        Assert.assertEquals(new BigDecimal("3.14"), result);
     }
 
     @Test
@@ -97,7 +98,7 @@ public class AttributeParserTest {
     }
 
     @Test
-    public void testParseDatetime() {
+    public void testParseDateTime() {
         // act
         val result = attributeParser.parse("2000-01-01 04:20:00", LocalDateTime.class);
         // assert

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.xml.namespace.QName;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -93,13 +94,13 @@ public class AttributeExtractorTest {
     }
 
     @Test
-    public void testReadDouble() {
+    public void testReadBigDecimal() {
         // arrange
         val row = newRow("attrDouble", "3.14");
         // act
-        val result = attributeExtractor.process(row).readDouble("attrDouble");
+        val result = attributeExtractor.process(row).readBigDecimal("attrDouble");
         // assert
-        Assert.assertEquals(3.14, result, 0);
+        Assert.assertEquals(new BigDecimal("3.14"), result);
     }
 
     @Test
@@ -133,11 +134,11 @@ public class AttributeExtractorTest {
     }
 
     @Test
-    public void testReadDatetime() {
+    public void testReadDateTime() {
         // arrange
         val row = newRow("attrDatetime", "2000-01-01 04:20:00");
         // act
-        val result = attributeExtractor.process(row).readDatetime("attrDatetime");
+        val result = attributeExtractor.process(row).readDateTime("attrDatetime");
         // assert
         Assert.assertEquals(LocalDateTime.of(2000, Month.JANUARY, 1, 4, 20, 0), result);
     }
